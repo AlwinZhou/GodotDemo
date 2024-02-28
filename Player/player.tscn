@@ -1,0 +1,141 @@
+[gd_scene load_steps=15 format=3 uid="uid://be0sylfjooorb"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_n3x4a"]
+[ext_resource type="Texture2D" uid="uid://g8emvnprah55" path="res://Top-Down Character/spritesheet/elf_spritesheet.png" id="2_nxsdx"]
+[ext_resource type="Texture2D" uid="uid://wdw22u25c240" path="res://MapFolder/controlPanel.png" id="3_16f8a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eu1yh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld7vu"]
+atlas = ExtResource("2_nxsdx")
+region = Rect2(72, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gwix"]
+atlas = ExtResource("2_nxsdx")
+region = Rect2(0, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsq7o"]
+atlas = ExtResource("2_nxsdx")
+region = Rect2(18, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3uaf"]
+atlas = ExtResource("2_nxsdx")
+region = Rect2(36, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llmy2"]
+atlas = ExtResource("2_nxsdx")
+region = Rect2(54, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdibq"]
+atlas = ExtResource("2_nxsdx")
+region = Rect2(72, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7iub"]
+atlas = ExtResource("2_nxsdx")
+region = Rect2(90, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gdgt"]
+atlas = ExtResource("2_nxsdx")
+region = Rect2(108, 18, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8k8x"]
+atlas = ExtResource("2_nxsdx")
+region = Rect2(126, 18, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lo08w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ld7vu")
+}],
+"loop": true,
+"name": &"Idel",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gwix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsq7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3uaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llmy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdibq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7iub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gdgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8k8x")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}]
+
+[node name="Player" type="Node2D"]
+position = Vector2(215, 150)
+script = ExtResource("1_n3x4a")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(360, 175)
+shape = SubResource("CircleShape2D_eu1yh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+position = Vector2(361, 175)
+sprite_frames = SubResource("SpriteFrames_lo08w")
+animation = &"Run"
+frame = 7
+frame_progress = 0.318535
+
+[node name="Camera2D" type="Camera2D" parent="Area2D/AnimatedSprite2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D/AnimatedSprite2D"]
+visible = false
+position = Vector2(429, -174)
+scale = Vector2(0.388835, 0.415354)
+texture = ExtResource("3_16f8a")
+
+[node name="Button" type="Button" parent="Area2D/AnimatedSprite2D/Sprite2D"]
+offset_left = -118.0
+offset_top = -199.0
+offset_right = 105.0
+offset_bottom = -130.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Attack"
+
+[node name="Button2" type="Button" parent="Area2D/AnimatedSprite2D/Sprite2D"]
+offset_left = -114.82
+offset_top = -75.31
+offset_right = 108.18
+offset_bottom = -6.30996
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Move"
+
+[node name="Button3" type="Button" parent="Area2D/AnimatedSprite2D/Sprite2D"]
+offset_left = -118.197
+offset_top = 51.3477
+offset_right = 104.803
+offset_bottom = 120.348
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Stay"
+
+[node name="RayCast2D" type="RayCast2D" parent="Area2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/Sprite2D/Button3" to="." method="_on_button_3_pressed"]
