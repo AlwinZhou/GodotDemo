@@ -1,8 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://be0sylfjooorb"]
+[gd_scene load_steps=16 format=3 uid="uid://be0sylfjooorb"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_n3x4a"]
 [ext_resource type="Texture2D" uid="uid://g8emvnprah55" path="res://Top-Down Character/spritesheet/elf_spritesheet.png" id="2_nxsdx"]
+[ext_resource type="Texture2D" uid="uid://bgi7vq8x416sy" path="res://Top-Down Character/elf_front_walk/elf_front_walk1.png" id="3_0s3wo"]
 [ext_resource type="Texture2D" uid="uid://wdw22u25c240" path="res://MapFolder/controlPanel.png" id="3_16f8a"]
+[ext_resource type="Texture2D" uid="uid://25niek8lmxcg" path="res://Top-Down Character/elf_front_walk/elf_front_walk2.png" id="4_0p5ng"]
+[ext_resource type="Texture2D" uid="uid://cmm4n0u6s2p5h" path="res://MapFolder/RoundPanel.png" id="4_1v114"]
+[ext_resource type="Texture2D" uid="uid://bo8jjrrnr1vbb" path="res://Top-Down Character/elf_front_walk/elf_front_walk3.png" id="5_3v1ug"]
+[ext_resource type="Texture2D" uid="uid://bl6obnqlltdf2" path="res://Top-Down Character/elf_front_walk/elf_front_walk4.png" id="6_0vyk6"]
+[ext_resource type="Texture2D" uid="uid://disqp8x05grdb" path="res://Top-Down Character/elf_front_walk/elf_front_walk5.png" id="7_pb4by"]
+[ext_resource type="Texture2D" uid="uid://bqjsijr035bkr" path="res://Top-Down Character/elf_front_walk/elf_front_walk6.png" id="8_17rpy"]
+[ext_resource type="Texture2D" uid="uid://d2rh8nnfcdccj" path="res://Top-Down Character/elf_front_walk/elf_front_walk7.png" id="9_jc4ag"]
+[ext_resource type="Texture2D" uid="uid://dxk5h14msphkf" path="res://Top-Down Character/elf_front_walk/elf_front_walk8.png" id="10_nuh2r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eu1yh"]
 
@@ -10,43 +19,14 @@
 atlas = ExtResource("2_nxsdx")
 region = Rect2(72, 0, 18, 18)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3gwix"]
-atlas = ExtResource("2_nxsdx")
-region = Rect2(0, 18, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hsq7o"]
-atlas = ExtResource("2_nxsdx")
-region = Rect2(18, 18, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o3uaf"]
-atlas = ExtResource("2_nxsdx")
-region = Rect2(36, 18, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_llmy2"]
-atlas = ExtResource("2_nxsdx")
-region = Rect2(54, 18, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wdibq"]
-atlas = ExtResource("2_nxsdx")
-region = Rect2(72, 18, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k7iub"]
-atlas = ExtResource("2_nxsdx")
-region = Rect2(90, 18, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4gdgt"]
-atlas = ExtResource("2_nxsdx")
-region = Rect2(108, 18, 18, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n8k8x"]
-atlas = ExtResource("2_nxsdx")
-region = Rect2(126, 18, 18, 18)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_lo08w"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ld7vu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0s3wo")
 }],
 "loop": true,
 "name": &"Idel",
@@ -54,31 +34,36 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3gwix")
+"texture": ExtResource("3_0s3wo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hsq7o")
+"texture": ExtResource("4_0p5ng")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o3uaf")
+"texture": ExtResource("5_3v1ug")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_llmy2")
+"texture": ExtResource("6_0vyk6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wdibq")
+"texture": ExtResource("7_pb4by")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k7iub")
+"texture": ExtResource("8_17rpy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4gdgt")
+"texture": ExtResource("9_jc4ag")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n8k8x")
+"texture": ExtResource("10_nuh2r")
 }],
 "loop": true,
 "name": &"Run",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
 "speed": 5.0
 }]
 
@@ -96,18 +81,17 @@ shape = SubResource("CircleShape2D_eu1yh")
 position = Vector2(361, 175)
 sprite_frames = SubResource("SpriteFrames_lo08w")
 animation = &"Run"
-frame = 7
-frame_progress = 0.318535
+frame_progress = 0.891178
 
 [node name="Camera2D" type="Camera2D" parent="Area2D/AnimatedSprite2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D/AnimatedSprite2D"]
+[node name="MovementPanel" type="Sprite2D" parent="Area2D/AnimatedSprite2D"]
 visible = false
 position = Vector2(429, -174)
 scale = Vector2(0.388835, 0.415354)
 texture = ExtResource("3_16f8a")
 
-[node name="Button" type="Button" parent="Area2D/AnimatedSprite2D/Sprite2D"]
+[node name="Button" type="Button" parent="Area2D/AnimatedSprite2D/MovementPanel"]
 offset_left = -118.0
 offset_top = -199.0
 offset_right = 105.0
@@ -116,7 +100,7 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 text = "Attack"
 
-[node name="Button2" type="Button" parent="Area2D/AnimatedSprite2D/Sprite2D"]
+[node name="MoveButton" type="Button" parent="Area2D/AnimatedSprite2D/MovementPanel"]
 offset_left = -114.82
 offset_top = -75.31
 offset_right = 108.18
@@ -125,7 +109,7 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 text = "Move"
 
-[node name="Button3" type="Button" parent="Area2D/AnimatedSprite2D/Sprite2D"]
+[node name="StayButton" type="Button" parent="Area2D/AnimatedSprite2D/MovementPanel"]
 offset_left = -118.197
 offset_top = 51.3477
 offset_right = 104.803
@@ -134,8 +118,35 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 text = "Stay"
 
+[node name="RoundPanel" type="Sprite2D" parent="Area2D/AnimatedSprite2D"]
+visible = false
+show_behind_parent = true
+light_mask = 2
+position = Vector2(28, -136)
+scale = Vector2(0.731169, 0.345754)
+texture = ExtResource("4_1v114")
+
+[node name="FinishRoundButton" type="Button" parent="Area2D/AnimatedSprite2D/RoundPanel"]
+offset_left = -88.8987
+offset_top = -72.3056
+offset_right = 83.1013
+offset_bottom = -41.3056
+scale = Vector2(1, 4.93343)
+text = "Finish Current Round"
+
 [node name="RayCast2D" type="RayCast2D" parent="Area2D"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
 
-[connection signal="pressed" from="Area2D/AnimatedSprite2D/Sprite2D/Button3" to="." method="_on_button_3_pressed"]
+[node name="RoundLabel" type="Label" parent="."]
+offset_left = 176.0
+offset_top = -64.0
+offset_right = 592.0
+offset_bottom = 5.0
+theme_override_font_sizes/font_size = 50
+text = "Current Round: 1"
+
+[connection signal="button_down" from="Area2D/AnimatedSprite2D/MovementPanel/MoveButton" to="." method="_on_move_button_button_down"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_stay_button_pressed"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/RoundPanel/FinishRoundButton" to="." method="_on_finish_round_button_pressed"]
