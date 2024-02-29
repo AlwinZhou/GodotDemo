@@ -68,22 +68,24 @@ animations = [{
 }]
 
 [node name="Player" type="Node2D"]
-position = Vector2(215, 150)
+position = Vector2(219, 149)
 script = ExtResource("1_n3x4a")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(360, 175)
+position = Vector2(1, 1)
 shape = SubResource("CircleShape2D_eu1yh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
-position = Vector2(361, 175)
+position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_lo08w")
 animation = &"Run"
 frame_progress = 0.891178
 
 [node name="Camera2D" type="Camera2D" parent="Area2D/AnimatedSprite2D"]
+position = Vector2(14, 16)
 
 [node name="MovementPanel" type="Sprite2D" parent="Area2D/AnimatedSprite2D"]
 visible = false
@@ -119,30 +121,38 @@ theme_override_font_sizes/font_size = 50
 text = "Stay"
 
 [node name="RoundPanel" type="Sprite2D" parent="Area2D/AnimatedSprite2D"]
-visible = false
 show_behind_parent = true
 light_mask = 2
-position = Vector2(28, -136)
-scale = Vector2(0.731169, 0.345754)
+position = Vector2(-418.821, -230)
+scale = Vector2(0.344267, 0.345754)
 texture = ExtResource("4_1v114")
 
 [node name="FinishRoundButton" type="Button" parent="Area2D/AnimatedSprite2D/RoundPanel"]
-offset_left = -88.8987
-offset_top = -72.3056
-offset_right = 83.1013
-offset_bottom = -41.3056
-scale = Vector2(1, 4.93343)
-text = "Finish Current Round"
+offset_left = -163.185
+offset_top = -130.15
+offset_right = -50.1852
+offset_bottom = -99.1503
+scale = Vector2(2.85796, 8.89327)
+text = "Finish  Round"
+
+[node name="NextButton" type="Button" parent="Area2D/AnimatedSprite2D"]
+offset_left = 344.0
+offset_top = 168.0
+offset_right = 458.0
+offset_bottom = 222.0
+text = "Next"
+vertical_icon_alignment = 0
 
 [node name="RayCast2D" type="RayCast2D" parent="Area2D"]
+position = Vector2(0, 4)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
 
 [node name="RoundLabel" type="Label" parent="."]
-offset_left = 176.0
-offset_top = -64.0
-offset_right = 592.0
-offset_bottom = 5.0
+offset_left = -193.0
+offset_top = -266.0
+offset_right = 223.0
+offset_bottom = -197.0
 theme_override_font_sizes/font_size = 50
 text = "Current Round: 1"
 
@@ -150,3 +160,4 @@ text = "Current Round: 1"
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_stay_button_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/RoundPanel/FinishRoundButton" to="." method="_on_finish_round_button_pressed"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/NextButton" to="." method="_on_next_button_pressed"]

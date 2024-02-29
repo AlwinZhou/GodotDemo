@@ -2,7 +2,7 @@ extends Node2D
 var playerRound = 0
 var NextRound = 1
 var moving = false
-var MoveSpeed = 3
+var MoveDistance = 10
 var tile_size = 16
 var inputs = {
 	"ui_right": Vector2.RIGHT,
@@ -15,6 +15,10 @@ var playersRound = []
 @onready var anim = get_node("Area2D/AnimatedSprite2D")
 #@onready var ray = $RayCast2D
 
+# Below is to implement mouce click movement
+var click_position = Vector2()
+var target_position = Vector2()
+var moveSpeed = 5 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	position = position.snapped(Vector2.ONE * tile_size)
@@ -24,13 +28,19 @@ func _process(delta):
 	if playerRound == NextRound:
 		moving = false
 	anim.play("Idel")
+	#implement mouce click movement
+	if moving:
+		if Input.is_action_just_pressed("left_click"):
+			click_position = get_global_mouse_position()
+		if position.distance_to(click_position)	> 0 and position.distance_to(click_position)<tile_size*MoveDistance:
+				position = click_position
+				print(click_position)
+				print(position)
+				playerRound += 1
+				RoundPanel.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _unhandled_input(event):
-	#print("PlayerRound:")
-	#print(playerRound)
-	#print("NextRound:")
-	#print(NextRound)
 	if moving == true:
 		for dir in inputs.keys():
 			if event.is_action_pressed(dir):
@@ -41,7 +51,7 @@ func _unhandled_input(event):
 				
 
 func move(dir):
-	position += inputs[dir] * tile_size*MoveSpeed
+	position += inputs[dir] * tile_size*MoveDistance
 
 #func move_ray(dir):
 	#ray.target_position = inputs[dir] * tile_size
@@ -65,9 +75,13 @@ func _on_finish_round_button_pressed():
 	RoundLabel.text = "Current Round:" + str(NextRound)
 	
 
+@onready var movementPanel = get_node("Area2D/AnimatedSprite2D/MovementPanel")
 
-
-
-
-
-
+var next_flip = true
+func _on_next_button_pressed():
+	if(next_flip):
+		movementPanel.visible = true
+	else:	
+		movementPanel.visible = false
+	next_flip = !next_flip	
+	
