@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://be0sylfjooorb"]
+[gd_scene load_steps=23 format=3 uid="uid://be0sylfjooorb"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_n3x4a"]
 [ext_resource type="Texture2D" uid="uid://g8emvnprah55" path="res://Top-Down Character/spritesheet/elf_spritesheet.png" id="2_nxsdx"]
@@ -13,6 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://d2rh8nnfcdccj" path="res://Top-Down Character/elf_front_walk/elf_front_walk7.png" id="9_jc4ag"]
 [ext_resource type="Texture2D" uid="uid://dxk5h14msphkf" path="res://Top-Down Character/elf_front_walk/elf_front_walk8.png" id="10_nuh2r"]
 [ext_resource type="Script" path="res://Player/Camera2D.gd" id="11_pj554"]
+[ext_resource type="Texture2D" uid="uid://bcxu7nl3a5wye" path="res://Map/arrow/image (1).png" id="14_xmyal"]
+[ext_resource type="Texture2D" uid="uid://5jr50ggktsbl" path="res://Map/arrow/image (2).png" id="15_6yqw0"]
+[ext_resource type="Texture2D" uid="uid://b6ulngqsgcg11" path="res://Map/arrow/image (3).png" id="16_0mbdy"]
+[ext_resource type="Texture2D" uid="uid://c8dgqpk655hxr" path="res://Map/arrow/image (4).png" id="17_6j5cc"]
+[ext_resource type="Texture2D" uid="uid://c1aclokj8ltlq" path="res://Map/arrow/image.png" id="18_f2ux5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eu1yh"]
 radius = 11.0
@@ -67,6 +72,29 @@ animations = [{
 "loop": true,
 "name": &"new_animation",
 "speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h8d52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_xmyal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_6yqw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0mbdy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_6j5cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_f2ux5")
+}],
+"loop": true,
+"name": &"point",
+"speed": 8.0
 }]
 
 [node name="Player" type="Node2D"]
@@ -158,6 +186,14 @@ offset_bottom = 222.0
 text = "Next"
 vertical_icon_alignment = 0
 
+[node name="AnimatedArrow" type="AnimatedSprite2D" parent="Area2D/AnimatedSprite2D"]
+position = Vector2(6.42204, -33.945)
+scale = Vector2(0.0860181, 0.074035)
+sprite_frames = SubResource("SpriteFrames_h8d52")
+animation = &"point"
+frame = 3
+frame_progress = 0.0510961
+
 [node name="RayCast2D" type="RayCast2D" parent="Area2D"]
 position = Vector2(0, 4)
 
@@ -173,11 +209,11 @@ text = "Current Round: 1"
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="button_down" from="Area2D/AnimatedSprite2D/MovementPanel/MoveButton" to="." method="_on_move_button_button_down"]
-[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_stay_button_pressed"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_button_3_pressed"]
 [connection signal="button_down" from="Area2D/AnimatedSprite2D/MovementPanel/CancelButton" to="." method="_on_cancel_button_button_down"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/CancelButton" to="." method="_on_stay_button_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/CancelButton" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/CancelButton" to="." method="_on_stay_button_2_pressed"]
-[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/CancelButton" to="." method="_on_stay_button_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/RoundPanel/FinishRoundButton" to="." method="_on_finish_round_button_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/NextButton" to="." method="_on_next_button_pressed"]

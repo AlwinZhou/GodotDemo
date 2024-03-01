@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mecf0son6l7m"]
+
+[ext_resource type="Script" path="res://LogicManage/CharacterLogicManagement.gd" id="1_di42m"]
+
+[node name="CharacterLogicManagement" type="Node2D"]
+script = ExtResource("1_di42m")
