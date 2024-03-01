@@ -2,7 +2,7 @@ extends Node2D
 var playerRound = 0
 var NextRound = 1
 var moving = false
-var MoveDistance = 10
+@export var MoveDistance = 10
 var tile_size = 16
 var inputs = {
 	"ui_right": Vector2.RIGHT,
@@ -14,11 +14,14 @@ var playersRound = []
 @onready var RoundPanel = get_node("Area2D/AnimatedSprite2D/RoundPanel")
 @onready var anim = get_node("Area2D/AnimatedSprite2D")
 #@onready var ray = $RayCast2D
+#Zoom in and out the camera
 
 # Below is to implement mouce click movement
 var click_position = Vector2()
 var target_position = Vector2()
 var moveSpeed = 5 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	position = position.snapped(Vector2.ONE * tile_size)
@@ -47,7 +50,7 @@ func _unhandled_input(event):
 				move(dir)
 				playerRound += 1
 				RoundPanel.visible = true
-				
+
 				
 
 func move(dir):
@@ -77,11 +80,34 @@ func _on_finish_round_button_pressed():
 
 @onready var movementPanel = get_node("Area2D/AnimatedSprite2D/MovementPanel")
 
-var next_flip = true
+
 func _on_next_button_pressed():
-	if(next_flip):
-		movementPanel.visible = true
-	else:	
-		movementPanel.visible = false
-	next_flip = !next_flip	
+	pass
 	
+
+
+func _on_area_2d_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
+			movementPanel.visible = true
+
+
+
+func _on_cancel_button_button_down():
+	movementPanel.visible = false
+
+
+
+# manage camera
+var zoom_min = Vector2(0.2,0.2)
+var zoom_max = Vector2(0.2,0.2)
+var zoom_speed = Vector2(0.2,0.2)
+
+#func camera_input(event):
+	#if event is InputEventMouseButton:
+		#if Input.is_action_just_released("ZoomIn"):
+			#if zoom>zoom_min:
+				#zoom -= zoom_speed
+			#if Input.is_action_just_released("ZoomOut"):
+				#if zoom<zoom_max:
+					#zoom -= zoom_speed

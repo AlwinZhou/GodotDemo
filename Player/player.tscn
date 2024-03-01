@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://be0sylfjooorb"]
+[gd_scene load_steps=17 format=3 uid="uid://be0sylfjooorb"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_n3x4a"]
 [ext_resource type="Texture2D" uid="uid://g8emvnprah55" path="res://Top-Down Character/spritesheet/elf_spritesheet.png" id="2_nxsdx"]
@@ -12,8 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://bqjsijr035bkr" path="res://Top-Down Character/elf_front_walk/elf_front_walk6.png" id="8_17rpy"]
 [ext_resource type="Texture2D" uid="uid://d2rh8nnfcdccj" path="res://Top-Down Character/elf_front_walk/elf_front_walk7.png" id="9_jc4ag"]
 [ext_resource type="Texture2D" uid="uid://dxk5h14msphkf" path="res://Top-Down Character/elf_front_walk/elf_front_walk8.png" id="10_nuh2r"]
+[ext_resource type="Script" path="res://Player/Camera2D.gd" id="11_pj554"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eu1yh"]
+radius = 11.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ld7vu"]
 atlas = ExtResource("2_nxsdx")
@@ -68,24 +70,26 @@ animations = [{
 }]
 
 [node name="Player" type="Node2D"]
-position = Vector2(219, 149)
+position = Vector2(255, 148)
+scale = Vector2(1.09, 1.09)
 script = ExtResource("1_n3x4a")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, 1)
+position = Vector2(1, 2.7523)
 shape = SubResource("CircleShape2D_eu1yh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
-position = Vector2(0, 2)
+position = Vector2(1.91742, 2.7523)
 sprite_frames = SubResource("SpriteFrames_lo08w")
 animation = &"Run"
 frame_progress = 0.891178
 
 [node name="Camera2D" type="Camera2D" parent="Area2D/AnimatedSprite2D"]
-position = Vector2(14, 16)
+position = Vector2(-0.917439, 0.917429)
+script = ExtResource("11_pj554")
 
 [node name="MovementPanel" type="Sprite2D" parent="Area2D/AnimatedSprite2D"]
 visible = false
@@ -93,7 +97,7 @@ position = Vector2(429, -174)
 scale = Vector2(0.388835, 0.415354)
 texture = ExtResource("3_16f8a")
 
-[node name="Button" type="Button" parent="Area2D/AnimatedSprite2D/MovementPanel"]
+[node name="Attack" type="Button" parent="Area2D/AnimatedSprite2D/MovementPanel"]
 offset_left = -118.0
 offset_top = -199.0
 offset_right = 105.0
@@ -120,7 +124,17 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 text = "Stay"
 
+[node name="CancelButton" type="Button" parent="Area2D/AnimatedSprite2D/MovementPanel"]
+offset_left = -118.302
+offset_top = 170.939
+offset_right = 104.698
+offset_bottom = 247.939
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Cancel"
+
 [node name="RoundPanel" type="Sprite2D" parent="Area2D/AnimatedSprite2D"]
+visible = false
 show_behind_parent = true
 light_mask = 2
 position = Vector2(-418.821, -230)
@@ -136,6 +150,7 @@ scale = Vector2(2.85796, 8.89327)
 text = "Finish  Round"
 
 [node name="NextButton" type="Button" parent="Area2D/AnimatedSprite2D"]
+visible = false
 offset_left = 344.0
 offset_top = 168.0
 offset_right = 458.0
@@ -156,8 +171,13 @@ offset_bottom = -197.0
 theme_override_font_sizes/font_size = 50
 text = "Current Round: 1"
 
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="button_down" from="Area2D/AnimatedSprite2D/MovementPanel/MoveButton" to="." method="_on_move_button_button_down"]
-[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_stay_button_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/StayButton" to="." method="_on_stay_button_pressed"]
+[connection signal="button_down" from="Area2D/AnimatedSprite2D/MovementPanel/CancelButton" to="." method="_on_cancel_button_button_down"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/CancelButton" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/CancelButton" to="." method="_on_stay_button_2_pressed"]
+[connection signal="pressed" from="Area2D/AnimatedSprite2D/MovementPanel/CancelButton" to="." method="_on_stay_button_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/RoundPanel/FinishRoundButton" to="." method="_on_finish_round_button_pressed"]
 [connection signal="pressed" from="Area2D/AnimatedSprite2D/NextButton" to="." method="_on_next_button_pressed"]
